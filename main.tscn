@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx8csfx2etnae"]
+
+[ext_resource type="Texture2D" uid="uid://bv2gesk5acstw" path="res://Assets/Space_BG (2 frames) (64 x 64).png" id="1_58ryv"]
+
+[sub_resource type="Animation" id="Animation_5rla4"]
+resource_name = "scroll"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 64, 240, 320), Rect2(0, 0, 240, 320)]
+}
+
+[sub_resource type="Animation" id="Animation_disce"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 240, 320)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjkwb"]
+_data = {
+"RESET": SubResource("Animation_disce"),
+"scroll": SubResource("Animation_5rla4")
+}
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(1.0125, 0.996875)
+texture = ExtResource("1_58ryv")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 240, 320)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fjkwb")
+}
+autoplay = "scroll"
